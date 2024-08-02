@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # us_visa_predictor
 
 <a target="_blank" href="https://cookiecutter-data-science.drivendata.org/">
@@ -60,8 +59,3 @@ End to end machine learning pipeline for US Visa Prediction system
 ```
 
 --------
-
-=======
-# us-visa-predictor-ml-pipeline
-End to end machine learning pipeline for predicting USA visa approval status
->>>>>>> origin/main
