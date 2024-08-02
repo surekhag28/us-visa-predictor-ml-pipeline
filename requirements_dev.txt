@@ -1,0 +1,21 @@
+ipykernel
+pandas
+numpy
+matplotlib
+plotly
+seaborn
+scipy
+scikit-learn
+imblearn
+xgboost
+catboost
+pymongo
+from_root
+evidently==0.2.8
+dill
+PyYAML
+statsmodels
+psycopg2-binary==2.9.9
+python-dotenv
+
+-e .
