@@ -4,7 +4,7 @@ import numpy as np
 from src.logger import logging as logger
 from src.db.db_connector import DatabaseConnection
 from src.exception import DatabaseConnectionError
-from src.config.config import DB_SCHEMA
+from src.config.config import DB_SCHEMA, DB_NAME
 
 class USvisaData:
     
@@ -19,13 +19,13 @@ class USvisaData:
     def export_data_as_dataframe(self):
         
         try:
-            query = 'SELECT * from ' + DB_SCHEMA + '.visadata'
+            query = 'SELECT * from ' + DB_SCHEMA + '.' + DB_NAME
             cursor = self.connection.cursor()
             cursor.execute(query)
             data = cursor.fetchall()
             columns = [desc[0] for desc in cursor.description]
         except Exception as e:
-            logger.error('Failed to establish connection with the database: {e}'.format(e))
+            logger.error('Failed to establish connection with the database')
             raise DatabaseConnectionError(e, sys)
         finally:
             if cursor:
@@ -41,4 +41,4 @@ class USvisaData:
 """ if __name__=='__main__':
     obj = USvisaData()
     data = obj.export_data_as_dataframe()
-    print(data.head(5)) """
+    print(data.head(5))  """

@@ -1,7 +1,7 @@
 import os
 import sys
 import pandas as pd
-from src.constants import DB_SCHEMA
+from src.constants import DB_SCHEMA, DB_NAME
 from src.logger import logging as logger
 from src.config.config import DataIngestionConfig
 from src.db.db_connector import DatabaseConnection
@@ -33,7 +33,7 @@ def create_db_schema(sql_file_path):
         logger.error('Unable to find sql file at location: %s', sql_file_path)
         raise
     except Exception as e:
-        logger.error('Database connection error: {}'.format(e))
+        logger.error('Database connection error')
         raise DatabaseConnectionError(e, sys)
 
     finally:
@@ -54,7 +54,7 @@ def load_data(file_path):
     df = pd.read_csv(file_path)
     data = df.values.tolist()
     
-    sql01 = "INSERT INTO " + DB_SCHEMA + ".visadata(case_id, continent, education_of_employee, \
+    sql01 = "INSERT INTO " + DB_SCHEMA + "." + DB_NAME + "(case_id, continent, education_of_employee, \
                     has_job_experience, requires_job_training, no_of_employees, yr_of_estab, \
                     region_of_employment, prevailing_wage, unit_of_wage, full_time_position, case_status)\
                     VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
@@ -65,13 +65,13 @@ def load_data(file_path):
         conn = db_connector.get_connection()
         
         cur = conn.cursor()
-        del_statement = "DELETE FROM " + DB_SCHEMA + ".visadata"
+        del_statement = "DELETE FROM " + DB_SCHEMA + "." + DB_NAME
         cur.execute(del_statement,)
         cur.executemany(sql01,data)
         conn.commit()
         conn.close()
     except Exception as e:
-        logger.error('Database connection error: {}'.format(e))
+        logger.error('Database connection error')
         raise DatabaseConnectionError(e, sys)
     finally:
         if conn is not None:
