@@ -33,10 +33,13 @@ class DataTransformationInput:
     processed_data_dir:str = os.path.join(DATA_DIR, PROCESSED_DATA_DIR)
     processed_train_file_path:str = os.path.join(processed_data_dir, PROCESSED_TRAIN_FILE)
     processed_test_file_path:str = os.path.join(processed_data_dir, PROCESSED_TEST_FILE)
+    transformed_obj_file_path:str = os.path.join(MODEL_DIR, PREPROCESSING_OBJ_FILE)
+    target_obj_file_path:str = os.path.join(MODEL_DIR, ENCODED_OBJ_FILE)
     
 @dataclass
 class DataTransformationOutput:
     processed_train_file_path:str
     processed_test_file_path:str
-    processor_obj_file_path:str
+    processed_obj_file_path:str
+    target_obj_file_path:str
     

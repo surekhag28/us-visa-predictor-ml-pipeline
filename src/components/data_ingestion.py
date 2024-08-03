@@ -61,6 +61,6 @@ class DataIngestion:
             logger.info("Data Ingestion completed")
             logger.info("Data Ingestion output: {}".format(data_ingestion_output))
             
-            return DataIngestionOutput
+            return data_ingestion_output
         except Exception as e:
             raise USvisaException(e, sys)
