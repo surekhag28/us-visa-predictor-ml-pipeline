@@ -24,3 +24,9 @@ PROCESSED_TEST_FILE:str = 'test_processed.npy'
 PREPROCESSING_OBJ_FILE:str = 'preprocessor.pkl'
 ENCODED_OBJ_FILE:str = 'targetencoder.pkl'
 SCHEMA_FILE_PATH:str = os.path.join('config', 'schema.yaml')
+
+# Model training related constants
+TRAINED_MODEL_FILE: str = 'model.pkl'
+MODEL_TRAINER_EXPECTED_SCORE:float = 0.6
+
+MLFLOW_TRACKING_URI:str = 'http://localhost:8080'

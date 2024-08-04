@@ -32,3 +32,10 @@ def save_numpy_array(file_path:str, array:np.array) -> None:
         logger.info('Saved processed data in file and exit the process')
     except Exception as e:
         raise USvisaException(e, sys)
+    
+def load_numpy_array(file_path:str) -> None:
+    try:
+        with open(file_path, 'rb') as file_obj:
+            return np.load(file_obj)
+    except Exception as e:
+        raise USvisaException(e, sys)
