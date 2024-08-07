@@ -20,14 +20,14 @@ from src.exception import *
 from src.constants import (
                             SCHEMA_FILE_PATH, 
                             MLFLOW_TRACKING_URI,
-                            MODEL_TRAINER_EXPECTED_SCORE
+                            MODEL_TRAINER_EXPECTED_SCORE,
+                            METRICS_DIR
                            )
 from src.utils import save_object
 from src.utils import load_numpy_array
 from src.config.config import (
                                     DataTransformationOutput,
                                     ModelTrainerInput,
-                                    ModelTrainerOutput,
                                     ClassificationMetric
                                 )
 
@@ -95,17 +95,13 @@ class ModelTrainer:
                     # evaluation on test data 
                     y_pred = best_models[name].predict(X_test)
                     accuracy = accuracy_score(y_test, y_pred)
-                    report = classification_report(y_test, y_pred)
+                    
                     logger.info("Test performance of model {} : {}".format(name, accuracy))
                     
 
                     mlflow.log_params(grid_search.best_params_)
                     mlflow.log_metric('accuracy',accuracy)
                     
-                    with open(f'{name}_classification_report.txt','w') as f:
-                        f.write(report)
-                    
-                    mlflow.log_artifact(f'{name}_classification_report.txt')
                     logger.info('MLflow Run ID: {}'.format(mlflow.active_run().info.run_id))
                     
                     if((accuracy > MODEL_TRAINER_EXPECTED_SCORE) and (accuracy > best_accuracy)):
@@ -120,27 +116,36 @@ class ModelTrainer:
             
             logger.info('Found the best model as {} with this configuration: {}'.format(best_model_details['name'], best_model_details['model']))
             logger.info('Training process completed')
+
+            return best_model_details
+        except Exception as e:
+            raise USvisaException(e, sys)
+          
+    def evaluate_model(self, best_model_details, test_arr):
+        
+        logger.info('Started evaluating the best model on test data')
+          
+        try:
+            save_object(self.model_trainer_input.trained_model_file_path, best_model_details['model'])
+            logger.info('Saved best model in the directory')
+            
+            y_pred = best_model_details['model'].predict(test_arr[:,:-1])
+            f1 = f1_score(test_arr[:,-1], y_pred)
+            precision = precision_score(test_arr[:,-1], y_pred)
+            recall = recall_score(test_arr[:,-1], y_pred)
+            report = classification_report(test_arr[:,-1], y_pred)
+            
+            with open(f'{METRICS_DIR}/best_model_classification_report.txt','w') as f:
+                f.write(report)
+            
+            metric_output = ClassificationMetric(f1_score=f1, precision_score=precision, recall_score=recall)
             
             with mlflow.start_run(run_name='Best Model') as run:
                 mlflow.log_param('best_model_name', best_model_details['name'])
                 mlflow.log_params(best_model_details['params'])
                 mlflow.log_metric('best accuracy', best_model_details['accuracy'])
-                mlflow.log_artifact(f'{best_model_details["name"]}_classification_report.txt')
+                mlflow.log_artifact(f'{METRICS_DIR}/best_model_classification_report.txt')
             
-            return best_model_details['model']
-        except Exception as e:
-            raise USvisaException(e, sys)
-          
-    def evaluate_model(self, model, test_arr):
-        
-        logger.info('Started evaluating the best model on test data')
-        try:
-            y_pred = model.predict(test_arr[:,:-1])
-            f1 = f1_score(test_arr[:,-1], y_pred)
-            precision = precision_score(test_arr[:,-1], y_pred)
-            recall = recall_score(test_arr[:,-1], y_pred)
-            
-            metric_output = ClassificationMetric(f1_score=f1, precision_score=precision, recall_score=recall)
             logger.info('Finished model evaluation on test data')
             return metric_output
         except Exception as e:
@@ -153,15 +158,13 @@ class ModelTrainer:
             train_arr = load_numpy_array(self.data_transformation_output.processed_train_file_path)
             test_arr = load_numpy_array(self.data_transformation_output.processed_test_file_path)
             
-            model = self.train_model(train_arr, test_arr)
-            save_object(self.model_trainer_input.trained_model_file_path, model)
-            
-            metrics = self.evaluate_model(model, test_arr)
+            best_model_details = self.train_model(train_arr, test_arr)
+
+            metrics = self.evaluate_model(best_model_details, test_arr)
             
             logger.info("Exit from the training process")
             
             logger.info("---------Model Performance Report----------")
             logger.info(metrics)
-            return metrics
         except Exception as e:
             raise USvisaException(e, sys)

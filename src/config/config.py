@@ -44,26 +44,19 @@ class DataTransformationOutput:
     target_obj_file_path:str
     
 @dataclass
-class ModelTrainerInput:
-    trained_model_file_path:str = os.path.join(MODEL_DIR, TRAINED_MODEL_FILE)
-    expected_accuracy:float = MODEL_TRAINER_EXPECTED_SCORE
-    
-@dataclass
-class ModelTrainerOutput:
-    trained_model_file_path:str
-    
-@dataclass
-class ModelEvaluationInput:
-    pass
-
-@dataclass
 class ClassificationMetric:
     f1_score:float
     precision_score:float
     recall_score:float
     
 @dataclass
-class ModelEvaluationOutput:
+class ModelTrainerInput:
+    trained_model_file_path:str = os.path.join(MODEL_DIR, TRAINED_MODEL_FILE)
+    expected_accuracy:float = MODEL_TRAINER_EXPECTED_SCORE
+    
+@dataclass
+class ModelTrainerOutput:
     metrics:ClassificationMetric
+    
 
     

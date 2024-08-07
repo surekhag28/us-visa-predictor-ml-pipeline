@@ -30,3 +30,4 @@ TRAINED_MODEL_FILE: str = 'model.pkl'
 MODEL_TRAINER_EXPECTED_SCORE:float = 0.6
 
 MLFLOW_TRACKING_URI:str = 'http://localhost:8080'
+METRICS_DIR: str = 'metrics'
