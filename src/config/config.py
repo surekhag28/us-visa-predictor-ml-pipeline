@@ -59,4 +59,8 @@ class ModelTrainerOutput:
     metrics:ClassificationMetric
     
 
-    
+class PredictionInput:
+    trained_model_file_path:str = os.path.join(MODEL_DIR, TRAINED_MODEL_FILE)
+    preprocessor_file_path:str = os.path.join(MODEL_DIR, PREPROCESSING_OBJ_FILE)
+    targetencoder_file_path:str = os.path.join(MODEL_DIR, ENCODED_OBJ_FILE)
+    prediction_file_path: str = os.path.join(os.path.join(DATA_DIR, PREDICTION_DATA_DIR), PREDICTION_DATA_FILE)

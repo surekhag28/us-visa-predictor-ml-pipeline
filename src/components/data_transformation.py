@@ -114,6 +114,7 @@ class DataTransformation:
             
             # save objects and data for further access during model training
             save_object(self.data_transform_input.transformed_obj_file_path, preprocessor)
+            save_object(self.data_transform_input.target_obj_file_path, target_encoder)
             save_numpy_array(self.data_transform_input.processed_train_file_path, train_arr)
             save_numpy_array(self.data_transform_input.processed_test_file_path, test_arr)
             

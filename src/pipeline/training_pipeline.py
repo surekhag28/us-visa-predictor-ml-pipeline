@@ -26,7 +26,7 @@ class TrainingPipeline:
         
         # model training and finding the best model for evaluation
         model_trainer = ModelTrainer(data_transformation_output, self.model_trainer_input)
-        model_trainer_output = model_trainer.run_model_trainer()
+        model_trainer.run_model_trainer()
         
 if __name__=="__main__":
     pipeline = TrainingPipeline()

@@ -31,3 +31,6 @@ MODEL_TRAINER_EXPECTED_SCORE:float = 0.6
 
 MLFLOW_TRACKING_URI:str = 'http://localhost:8080'
 METRICS_DIR: str = 'metrics'
+
+PREDICTION_DATA_DIR = 'inference'
+PREDICTION_DATA_FILE:str = 'prediction_data.csv'

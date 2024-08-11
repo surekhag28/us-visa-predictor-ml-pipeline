@@ -23,6 +23,17 @@ def save_object(file_path:str, obj:object) -> None:
     except Exception as e:
         raise USvisaException(e, sys)
     
+    
+def load_object(file_path:str) -> object:
+    try:
+        with open(file_path, 'rb') as file_obj:
+            obj = dill.load(file_obj)
+            
+        return obj
+    except Exception as e:
+        raise USvisaException(e, sys)
+    
+    
 def save_numpy_array(file_path:str, array:np.array) -> None:
     try:
         os.makedirs(os.path.dirname(file_path), exist_ok=True)
