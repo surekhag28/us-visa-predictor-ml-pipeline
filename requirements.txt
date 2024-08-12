@@ -4,7 +4,23 @@ isort
 loguru
 mkdocs
 pip
-python-dotenv
 tqdm
 typer
+
+pandas
+numpy
+scipy
+scikit-learn
+imblearn
+xgboost
+catboost
+pymongo
+from_root
+evidently==0.2.8
+dill
+PyYAML
+statsmodels
+psycopg2-binary==2.9.9
+python-dotenv
+mlflow
 -e .
