@@ -67,7 +67,7 @@ class PredictionPipeline:
         
         
         
-if __name__=="__main__":
+""" if __name__=="__main__":
     prediction_pipeline = PredictionPipeline()
-    prediction_pipeline.run_prediction_pipeline()
+    prediction_pipeline.run_prediction_pipeline() """
         

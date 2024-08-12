@@ -28,3 +28,12 @@ stages:
     - src/constants/__init__.py
     outs:
     - models/model.pkl
+  prediction:
+    cmd: python -c "from src.pipeline.prediction_pipeline import PredictionPipeline;
+      PredictionPipeline().run_prediction_pipeline()"
+    deps:
+    - models/model.pkl
+    - models/preprocessor.pkl
+    - models/targetencoder.pkl
+    - src/config/config.py
+    - src/constants/__init__.py
