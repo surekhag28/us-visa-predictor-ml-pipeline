@@ -28,7 +28,7 @@ class TrainingPipeline:
         model_trainer = ModelTrainer(data_transformation_output, self.model_trainer_input)
         model_trainer.run_model_trainer()
         
-if __name__=="__main__":
+""" if __name__=="__main__":
     pipeline = TrainingPipeline()
-    pipeline.run_training_pipeline()
+    pipeline.run_training_pipeline() """
     

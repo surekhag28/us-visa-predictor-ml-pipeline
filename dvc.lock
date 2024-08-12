@@ -85,3 +85,27 @@ stages:
       hash: md5
       md5: ef1a0e9423db878a9850cad4213449ba
       size: 3608177
+  prediction:
+    cmd: python -c "from src.pipeline.prediction_pipeline import PredictionPipeline;
+      PredictionPipeline().run_prediction_pipeline()"
+    deps:
+    - path: models/model.pkl
+      hash: md5
+      md5: ef1a0e9423db878a9850cad4213449ba
+      size: 3608177
+    - path: models/preprocessor.pkl
+      hash: md5
+      md5: 15917bc73e1732481adaeaa1fdac5de7
+      size: 3633
+    - path: models/targetencoder.pkl
+      hash: md5
+      md5: ba260fff24b7ac76f2ced362d04eade4
+      size: 297
+    - path: src/config/config.py
+      hash: md5
+      md5: b8a6d256e735e2c378bb0d2ca99cdcb8
+      size: 2226
+    - path: src/constants/__init__.py
+      hash: md5
+      md5: ea78a4c23ad9b26843725f56e66dd095
+      size: 1025
