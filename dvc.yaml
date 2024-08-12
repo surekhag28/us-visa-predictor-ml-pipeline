@@ -1,0 +1,30 @@
+stages:
+  data_ingestion:
+    cmd: python -c "from src.pipeline.training_pipeline import TrainingPipeline; TrainingPipeline().run_training_pipeline()"
+    deps:
+    - data/raw/
+    - src/components/data_ingestion.py
+    - src/config/config.py
+    - src/constants/__init__.py
+    outs:
+    - data/interim/
+  data_transformation:
+    cmd: python -c "from src.pipeline.training_pipeline import TrainingPipeline; TrainingPipeline().run_training_pipeline()"
+    deps:
+    - data/interim
+    - src/components/data_transformation.py
+    - src/config/config.py
+    - src/constants/__init__.py
+    outs:
+    - data/processed/
+    - models/preprocessor.pkl
+    - models/targetencoder.pkl
+  training:
+    cmd: python -c "from src.pipeline.training_pipeline import TrainingPipeline; TrainingPipeline().run_training_pipeline()"
+    deps:
+    - data/processed/
+    - src/components/model_trainer.py
+    - src/config/config.py
+    - src/constants/__init__.py
+    outs:
+    - models/model.pkl

@@ -1,0 +1,87 @@
+schema: '2.0'
+stages:
+  data_ingestion:
+    cmd: python -c "from src.pipeline.training_pipeline import TrainingPipeline; TrainingPipeline().run_training_pipeline()"
+    deps:
+    - path: data/raw/
+      hash: md5
+      md5: 13f26ea47be56803f3cf3f64d4f78879.dir
+      size: 1880839
+      nfiles: 2
+    - path: src/components/data_ingestion.py
+      hash: md5
+      md5: 79b00fb0734581c9772462f1d96c5dac
+      size: 2629
+    - path: src/config/config.py
+      hash: md5
+      md5: b8a6d256e735e2c378bb0d2ca99cdcb8
+      size: 2226
+    - path: src/constants/__init__.py
+      hash: md5
+      md5: ea78a4c23ad9b26843725f56e66dd095
+      size: 1025
+    outs:
+    - path: data/interim/
+      hash: md5
+      md5: f9b415bfbfa090e56ca205bcbecbec94.dir
+      size: 1856048
+      nfiles: 2
+  data_transformation:
+    cmd: python -c "from src.pipeline.training_pipeline import TrainingPipeline; TrainingPipeline().run_training_pipeline()"
+    deps:
+    - path: data/interim
+      hash: md5
+      md5: f9b415bfbfa090e56ca205bcbecbec94.dir
+      size: 1856048
+      nfiles: 2
+    - path: src/components/data_transformation.py
+      hash: md5
+      md5: 9a146960004213b55317f0ba129f1a20
+      size: 6341
+    - path: src/config/config.py
+      hash: md5
+      md5: b8a6d256e735e2c378bb0d2ca99cdcb8
+      size: 2226
+    - path: src/constants/__init__.py
+      hash: md5
+      md5: ea78a4c23ad9b26843725f56e66dd095
+      size: 1025
+    outs:
+    - path: data/processed/
+      hash: md5
+      md5: fa56e4d227fdf54b9091ed552cdf910a.dir
+      size: 8153856
+      nfiles: 2
+    - path: models/preprocessor.pkl
+      hash: md5
+      md5: 15917bc73e1732481adaeaa1fdac5de7
+      size: 3633
+    - path: models/targetencoder.pkl
+      hash: md5
+      md5: ba260fff24b7ac76f2ced362d04eade4
+      size: 297
+  training:
+    cmd: python -c "from src.pipeline.training_pipeline import TrainingPipeline; TrainingPipeline().run_training_pipeline()"
+    deps:
+    - path: data/processed/
+      hash: md5
+      md5: fa56e4d227fdf54b9091ed552cdf910a.dir
+      size: 8153856
+      nfiles: 2
+    - path: src/components/model_trainer.py
+      hash: md5
+      md5: 58e2e1935910e38121c8af6c79fd51f3
+      size: 7572
+    - path: src/config/config.py
+      hash: md5
+      md5: b8a6d256e735e2c378bb0d2ca99cdcb8
+      size: 2226
+    - path: src/constants/__init__.py
+      hash: md5
+      md5: ea78a4c23ad9b26843725f56e66dd095
+      size: 1025
+    outs:
+    - path: models/model.pkl
+      hash: md5
+      md5: ef1a0e9423db878a9850cad4213449ba
+      size: 3608177
