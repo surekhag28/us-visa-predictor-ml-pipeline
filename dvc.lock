@@ -10,7 +10,7 @@ stages:
       nfiles: 2
     - path: src/components/data_ingestion.py
       hash: md5
-      md5: b7c2d5b303e72f469ce90cd4d80d2e3b
+      md5: 64216d8db74102afb35a1d01f9a3bfe2
       size: 2629
     - path: src/config/config.py
       hash: md5
@@ -23,7 +23,7 @@ stages:
     outs:
     - path: data/interim/
       hash: md5
-      md5: 1255a0aa00108520c148372fca815e5a.dir
+      md5: 56e389b0eaa471aa090b976d8ebe5d1a.dir
       size: 1856048
       nfiles: 2
   data_transformation:

@@ -21,8 +21,6 @@ COPY . .
 
 RUN mkdir -p data/raw data/processed data/transformed
 
-RUN chmod +x /app/run_all.sh
-
-CMD ["/app/run_all.sh"]
+CMD ["dvc", "repro"]
 
 
