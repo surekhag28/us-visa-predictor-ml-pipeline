@@ -22,7 +22,7 @@ class DatabaseConnection:
                                     user = DBConfig.USER,
                                     password = DBConfig.PASSWORD,
                                     database = DBConfig.NAME
-            )
+                                )
             
             return True
         except OperationalError as e:

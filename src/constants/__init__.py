@@ -29,7 +29,10 @@ SCHEMA_FILE_PATH:str = os.path.join('config', 'schema.yaml')
 TRAINED_MODEL_FILE: str = 'model.pkl'
 MODEL_TRAINER_EXPECTED_SCORE:float = 0.6
 
-MLFLOW_TRACKING_URI:str = 'http://localhost:8080'
+#MLFLOW_TRACKING_URI:str = 'http://localhost:8080'
+#MLFLOW_TRACKING_URI:str = 'http://host.docker.internal:5000'
+MLFLOW_TRACKING_URI:str = 'http://mlflow:5000'
+
 METRICS_DIR: str = 'metrics'
 
 PREDICTION_DATA_DIR = 'inference'

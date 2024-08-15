@@ -28,7 +28,7 @@ class DataIngestion:
         try:
             visadata = USvisaData()
             df = visadata.export_data_as_dataframe()
-            train_data, test_data = train_test_split(df, test_size=self.data_ingestion_input.train_test_split_ratio, random_state=42)
+            train_data, test_data = train_test_split(df, test_size=self.data_ingestion_input.train_test_split_ratio, random_state=14)
             logger.info("Train test split performed on the dataset")
             dir_path = os.path.dirname(self.data_ingestion_input.train_file_path)
             os.makedirs(dir_path, exist_ok=True)

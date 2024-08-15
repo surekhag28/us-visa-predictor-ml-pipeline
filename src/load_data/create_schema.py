@@ -3,7 +3,7 @@ import sys
 import pandas as pd
 from src.constants import DB_SCHEMA, DB_NAME
 from src.logger import logging as logger
-from src.config.config import DataIngestionConfig
+from src.config.config import DataIngestionInput
 from src.db.db_connector import DatabaseConnection
 from src.exception import DatabaseConnectionError
 
@@ -82,6 +82,6 @@ if __name__=='__main__':
     create_db_schema(os.path.join(os.path.dirname(__file__), 'db_schema.sql'))
     logger.info('Database created')
     
-    load_data(DataIngestionConfig.raw_data_file_path)
+    load_data(DataIngestionInput.raw_data_file_path)
     logger.info('Data ingested into table')
     
