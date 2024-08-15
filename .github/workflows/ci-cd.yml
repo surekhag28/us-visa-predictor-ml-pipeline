@@ -35,16 +35,18 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build and push Docker image
+      - name: Start Docker containers
         run: |
           docker compose -f compose.yaml build
           docker compose -f compose.yaml up -d
-          docker ps
-          
-      - name: Run DVC pipeline
+          # Optional: Add a delay to ensure services are up and ready
+          sleep 10
+          docker compose -f compose.yaml ps
+
+      - name: Run DVC commands in Docker container
         run: |
-          dvc pull
-          dvc repro
+          docker compose -f compose.yaml run app dvc pull
+          docker compose -f compose.yaml run app dvc repro
 
       - name: Push Docker Image to DockerHub
         run: |
