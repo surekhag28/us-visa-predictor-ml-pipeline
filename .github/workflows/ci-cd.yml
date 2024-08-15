@@ -37,8 +37,8 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          docker compose -f compose.yml build
-          docker compose -f compose.yml up -d
+          docker compose -f compose.yaml build
+          docker compose -f compose.yaml up -d
           docker ps
           
       - name: Run DVC pipeline
