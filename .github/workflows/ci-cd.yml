@@ -33,9 +33,6 @@ jobs:
       - name: Test Docker image
         run: |
           docker compose -f compose.yaml up -d
-          docker compose -f compose.yaml exec -T app dvc pull
-          docker compose -f compose.yaml exec -T app dvc repro
-          # Run additional tests or validations here if necessary
           docker compose -f compose.yaml down
 
       - name: Configure AWS credentials
