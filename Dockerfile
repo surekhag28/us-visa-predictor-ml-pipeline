@@ -19,7 +19,7 @@ RUN pip install dvc[s3]
 
 COPY . .
 
-RUN mkdir -p data/raw data/processed data/transformed
+RUN mkdir -p /app/data/raw /app/data/processed /app/data/transformed
 
 CMD ["dvc", "repro"]
 
