@@ -1,0 +1,5 @@
+[core]
+    remote = dvc-remote
+['remote "dvc-remote"']
+    url = s3://dvc-remote-s3
+    region = ap-southeast-2
