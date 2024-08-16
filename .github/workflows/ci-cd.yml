@@ -35,7 +35,7 @@ jobs:
           docker compose -f compose.yaml up -d
           docker compose -f compose.yaml exec -T app dvc pull
           docker compose -f compose.yaml exec -T app dvc repro
-          # Run additional tests or validations
+          # Run additional tests or validations here if necessary
           docker compose -f compose.yaml down
 
       - name: Configure AWS credentials
@@ -50,17 +50,13 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v2
 
       - name: Build, tag, and push image to Amazon ECR
-        id: build-image
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
           IMAGE_TAG: latest
         run: |
-          # Build a docker container and
-          # push it to ECR so that it can
-          # be deployed to ECS.
+          # Build and tag the Docker image
           docker compose -f compose.yaml build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          # Push the Docker image to Amazon ECR
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
-      
-    
