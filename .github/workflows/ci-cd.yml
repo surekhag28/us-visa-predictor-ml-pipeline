@@ -37,9 +37,12 @@ jobs:
           AWS_REGION: ${{ secrets.AWS_REGION }}
         run: |
           docker compose -f compose.yaml up -d
-          docker compose -f compose.yaml run app dvc pull
-          docker compose -f compose.yaml run app dvc repro
-          # Run additional tests or validations here if necessary
+          # Validate AWS credentials
+          docker compose -f compose.yaml run -e AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY -e AWS_REGION app aws sts get-caller-identity
+          # Run DVC commands
+          docker compose -f compose.yaml run -e AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY -e AWS_REGION app dvc pull
+          docker compose -f compose.yaml run -e AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY -e AWS_REGION app dvc repro
+          # Run additional tests or validations if needed
           docker compose -f compose.yaml down
 
       - name: Configure AWS credentials
