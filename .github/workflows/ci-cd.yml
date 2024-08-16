@@ -32,8 +32,8 @@ jobs:
 
       - name: Test Docker image
         run: |
-          docker compose -f compose.yaml up -d
-          docker compose -f compose.yaml down
+          docker compose -f compose.yaml run app dvc pull
+          docker compose -f compose.yaml run app dvc repro
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
