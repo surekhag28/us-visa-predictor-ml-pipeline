@@ -62,7 +62,8 @@ jobs:
           IMAGE_TAG: latest
         run: |
           # Build and tag the Docker image
-          docker compose -f compose.yaml build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker compose -f compose.yaml build 
+          docker tag usa_visa_predictor_app:latest $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           # Push the Docker image to Amazon ECR
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
