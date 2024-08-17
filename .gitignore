@@ -1,5 +1,8 @@
 # Data
 /data/
+.dvc/cache
+.dvc/tmp
+!data/*.dvc
 /models/
 /mlruns/
 mlartifacts/
