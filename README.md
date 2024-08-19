@@ -28,7 +28,7 @@ The data consists of 25480 Rows and 12 Columns
 | no_of_employees     | Number of employees in the employer's company  |
 | yr_of_estab | Year in which the employer's company was established| 
 | region_of_employment     | Information of foreign worker's intended region of employment in the US.  |
-| prevailing_wage| Average wage paid to similarly employed workers in a specific occupation in the area of intended employment. <br/> The purpose of the prevailing wage is to ensure that the foreign worker is not underpaid compared to other workers <br/> offering the same or similar service in the same area of employment.     | 
+| prevailing_wage| Average wage paid to similarly employed workers in a specific occupation in the area of intended employment. <br/> The purpose of the prevailing wage is to ensure that the foreign worker is not underpaid compared to other workers offering the same or similar service in the same area of employment.     | 
 | unit_of_wage | Unit of prevailing wage. Values include Hourly, Weekly, Monthly, and Yearly.| 
 | full_time_position     | Is the position of work full-time? Y = Full Time Position; N = Part Time Position |
 | case_status     | Flag indicating if the Visa was certified or denied  |
@@ -219,11 +219,11 @@ The machine learning pipeline stages configured in dvc.yaml file will run sequen
 
 Add the following secrets in your GitHub repository settings under Secrets:
 
-AWS_ACCESS_KEY_ID: Your IAM user's access key.
-AWS_SECRET_ACCESS_KEY: Your IAM user's secret access key.
-AWS_REGION: Your AWS default region (e.g., us-east-1).
-AWS_ACCOUNT_ID: Your IAM user's account id
-ECR_REPOSITORY: The URI of your ECR repository.
+* AWS_ACCESS_KEY_ID: Your IAM user's access key.
+* AWS_SECRET_ACCESS_KEY: Your IAM user's secret access key.
+* AWS_REGION: Your AWS default region (e.g., us-east-1).
+* AWS_ACCOUNT_ID: Your IAM user's account id
+* ECR_REPOSITORY: The URI of your ECR repository.
 
 #### Define the CI/CD Workflow
 
