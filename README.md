@@ -1,10 +1,5 @@
 # USA Visa Predictor
 
-
-
-
-# USA Visa Predictor
-
 The Immigration and Nationality Act (INA) of the US permits foreign workers to come to the United States to work on either a temporary or permanent basis. The act also protects US workers against adverse impacts on working place and maintain requirements when they hire foreign workers to fill workforce shortages. The immigration programs are administered by the Office of Foreign Labor Certification (OFLC).
 
 ## Problem
@@ -33,7 +28,7 @@ The data consists of 25480 Rows and 12 Columns
 | no_of_employees     | Number of employees in the employer's company  |
 | yr_of_estab | Year in which the employer's company was established| 
 | region_of_employment     | Information of foreign worker's intended region of employment in the US.  |
-| prevailing_wage| Average wage paid to similarly employed workers in a specific occupation in the area of intended employment. <br/> The purpose of the prevailing wage is to ensure that the foreign worker <br/> is not underpaid compared to other workers offering the same or similar service in the same area of employment.     | 
+| prevailing_wage| Average wage paid to similarly employed workers in a specific occupation in the area of intended employment. <br/> The purpose of the prevailing wage is to ensure that the foreign worker is not underpaid compared to other workers <br/> offering the same or similar service in the same area of employment.     | 
 | unit_of_wage | Unit of prevailing wage. Values include Hourly, Weekly, Monthly, and Yearly.| 
 | full_time_position     | Is the position of work full-time? Y = Full Time Position; N = Part Time Position |
 | case_status     | Flag indicating if the Visa was certified or denied  |
@@ -140,20 +135,21 @@ Before you begin the installation process, ensure you have the following:
 * Access to a terminal or command-line interface
 
 ## Installation Steps
-    1. Clone the repository to your local machine using Git:
 
-    ```bash
-    git https://github.com/surekhag28/us-visa-predictor-ml-pipeline.git                 
-    cd us-visa-predictor-ml-pipeline ```
+1. Clone the repository to your local machine using Git:
 
-    2. Create and Activate a Conda Environment:
+    
+    ```git https://github.com/surekhag28/us-visa-predictor-ml-pipeline.git```            
+    ```cd us-visa-predictor-ml-pipeline ```
 
-    conda create -n venv python=3.11 -y
-    conda activate venv
+2. Create and Activate a Conda Environment:
 
-    3. Install Dependencies
+    ```conda create -n venv python=3.11 -y```
+    ```conda activate venv```
 
-    pip install -r requirements_dev.txt
+3. Install Dependencies
+
+    ```pip install -r requirements_dev.txt```
 
 
 ## AWS Services Setup
@@ -166,7 +162,7 @@ Log in to the AWS Console and perform the following:
 * AmazonEC2FullAccess for EC2 access.
 * AmazonS3FullAccess for S3 access.
 
-**Create an S3 Bucket
+#### Create an S3 Bucket
 
 Navigate to the Amazon S3 service and create a bucket:
 
@@ -174,19 +170,19 @@ Navigate to the Amazon S3 service and create a bucket:
 * Region: Select your preferred AWS region
 * Permissions: Ensure the bucket is accessible to your IAM user.
 
-**Create an ECR Repository
+#### Create an ECR Repository
 
 Navigate to the Amazon ECR service and create a new repository. Note the URI:
 
 e.g., <account_id>.dkr.ecr.ap-southeast-2.amazonaws.com/usa_visa_predictor_repo
 
-**Postgres DB Setup
+#### Postgres DB Setup
 
 Create a Postgres Database
 * Download and Install postgresql server on machine.
 * Run command ```python src/load_data/create_schema.py``` for generating DB schema and inserting data into table.
 
-Configure Environment Variables:
+#### Configure Environment Variables:
 
 Before running the application, set up the necessary environment variables in .env file under project folder.
 
@@ -209,17 +205,17 @@ Before running the application, set up the necessary environment variables in .e
 
 First build the docker image
 
-``` docker compose build```
+```docker compose build```
 
 Run the docker container
 
-``` docker compose up -d```
+```docker compose up -d```
 
 The machine learning pipeline stages configured in dvc.yaml file will run sequentially for both training the model and predictions at the end.
 
 ## AWS CI/CD Deployment with GitHub Actions
 
-Set Up GitHub Secrets
+#### Set Up GitHub Secrets
 
 Add the following secrets in your GitHub repository settings under Secrets:
 
@@ -229,7 +225,7 @@ AWS_REGION: Your AWS default region (e.g., us-east-1).
 AWS_ACCOUNT_ID: Your IAM user's account id
 ECR_REPOSITORY: The URI of your ECR repository.
 
-Define the CI/CD Workflow
+#### Define the CI/CD Workflow
 
 .github/workflows/ci-cd.yml file to automate the deployment
 
