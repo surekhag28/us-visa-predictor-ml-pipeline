@@ -1,6 +1,7 @@
 #### Note
 Sample project to explore on how to build end to end machine learning pipeline along with deployment on AWS EC2.
-Tech stack: Python, Postgres DB, PL/SQL, Git, DVC, Docker, AWS ECR, EC2, CI/CD using Github Actions.
+
+## Tech stack: Python, Postgres DB, PL/SQL, Git, DVC, Docker, AWS ECR, EC2, CI/CD using Github Actions.
 
 # USA Visa Predictor
 
