@@ -1,3 +1,7 @@
+#### Note
+Sample project to explore on how to build end to end machine learning pipeline along with deployment on AWS EC2.
+Tech stack: Python, Postgres DB, PL/SQL, Git, DVC, Docker, AWS ECR, EC2, CI/CD using Github Actions.
+
 # USA Visa Predictor
 
 The Immigration and Nationality Act (INA) of the US permits foreign workers to come to the United States to work on either a temporary or permanent basis. The act also protects US workers against adverse impacts on working place and maintain requirements when they hire foreign workers to fill workforce shortages. The immigration programs are administered by the Office of Foreign Labor Certification (OFLC).
